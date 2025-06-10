@@ -2,115 +2,169 @@
   text-align: center;
   width: 100vw;
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 80px;
   box-sizing: border-box;
-  background-image: url("/bg.jpg");
+  background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%);
   background-size: cover;
+  min-height: 100vh;
 }
 
 .strike {
   text-decoration: line-through;
+  opacity: 0.6;
 }
 
-/* Стили блока info */
+/* Info block styles */
 .info {
   display: flex;
   justify-content: center;
-  height: 100px;
-  align-self: center;
+  gap: 32px;
+  height: 110px;
+  align-items: center;
+  margin-bottom: 32px;
 }
 
-/* Блок money */
+/* Currency card */
 .money {
-  color: #fff;
-  border: solid;
-  border-radius: 5px;
-  height: 80%;
-  float: inline-start;
-  padding: 2% 1% 0%;
-}
-
-/* Информация о погоде */
-.weather-info {
-  color: #fff;
-  border: solid;
-  border-radius: 5px;
-  height: 80%;
-  float: inline-end;
-  padding: 1%;
-}
-
-/* Оформление элемента todo */
-.item-todo {
-  padding: 14px;
-  margin: 0 auto;
-  text-align: left;
-  margin-top: 15px;
-  background: linear-gradient(90deg, rgba(93, 12, 255, 1) 0%, #2ea4db 100%);
-  color: #fff;
+  color: #2d3748;
+  background: #fff;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  max-width: 60%;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(93, 12, 255, 0.08);
+  padding: 18px 32px;
+  font-size: 1.1em;
+  min-width: 180px;
+  text-align: left;
 }
 
-/* Стиль текста в блоке item-todo */
-.item-todo .item-text {
-  display: inline-block;
-  cursor: pointer;
+/* Weather card */
+.weather-info {
+  color: #2d3748;
+  background: #fff;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(46, 164, 219, 0.08);
+  padding: 18px 32px 18px 24px;
+  font-size: 1.1em;
+  min-width: 220px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* Иконка погоды */
 .weather-info .weather-icon {
   display: inline-block;
   cursor: pointer;
-  float: right;
-  font-size: 22px;
-  position: relative;
-  left: -4px;
-  bottom: 5px;
+  font-size: 32px;
+  position: static;
+  margin-left: 12px;
 }
 
-/* Заголовок списка */
+/* Todo list header */
 .list-header {
-  color: aliceblue;
-  font-size: 20px;
-  padding-top: 1%;
+  color: #5d0cff;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
 }
 
-/* Поле ввода */
-input {
-  padding: 14px 32px 14px 16px;
-  border-radius: 4px 0 0 4px;
-  border: 3px solid #5d0cff;
-  outline: none;
-  background: white;
-}
-
-/* Кнопка */
-button {
-  padding: 16px 7px;
-  border: none;
-  border-radius: 0 4px 4px 0;
+/* Todo item card */
+.item-todo {
+  padding: 18px 24px;
+  margin: 0 auto 18px auto;
+  text-align: left;
+  background: #fff;
+  color: #2d3748;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(93, 12, 255, 0.08);
   cursor: pointer;
-  outline: none;
-  background: linear-gradient(90deg, rgba(93, 12, 255, 1) 0%, #2ea4db 100%);
-  color: #fff;
-  text-transform: capitalize;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.item-todo:hover {
+  box-shadow: 0 6px 24px rgba(93, 12, 255, 0.16);
+  transform: translateY(-2px) scale(1.01);
 }
 
-/* Иконка удаления */
+.item-todo .item-text {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.item-todo .item-text.strike {
+  color: #a0aec0;
+}
+
 .item-todo .item-delete {
   display: inline-block;
   cursor: pointer;
-  float: right;
-  font-size: 22px;
-  position: relative;
-  left: -4px;
-  bottom: 5px;
+  font-size: 1.3em;
+  color: #e53e3e;
+  margin-left: 18px;
+  transition: color 0.2s, transform 0.2s;
+}
+.item-todo .item-delete:hover {
+  color: #c53030;
+  transform: scale(1.2);
 }
 
-/* Класс strike применяется к зачёркнутому тексту */
-.strike {
-  text-decoration: line-through;
+/* Input and button styles */
+form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  gap: 0;
+}
+input[type="text"] {
+  padding: 16px 20px;
+  border-radius: 8px 0 0 8px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  background: #f8fafc;
+  font-size: 1em;
+  min-width: 220px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="text"]:focus {
+  border-color: #2ea4db;
+  box-shadow: 0 0 0 2px #2ea4db33;
+}
+button {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(90deg, #5d0cff 0%, #2ea4db 100%);
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(46, 164, 219, 0.08);
+}
+button:hover {
+  background: linear-gradient(90deg, #2ea4db 0%, #5d0cff 100%);
+  box-shadow: 0 4px 16px rgba(46, 164, 219, 0.16);
+}
+
+@media (max-width: 600px) {
+  .info {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .money,
+  .weather-info {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
