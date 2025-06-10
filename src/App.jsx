@@ -5,7 +5,7 @@ import ToDo from "./Tasks";
 import ToDoForm from "./AddTask";
 
 const TASKS_STORAGE_KEY = "tasks-list-project-web";
-const weatherApiKey = "c7616da4b68205c2f3ae73df2c31d177";
+const WEATHER_API_KEY = "e7bc7a3b-708f-42f6-814f-98be2c495763";
 
 function App() {
   const [rates, setRates] = useState({});
@@ -62,10 +62,15 @@ function App() {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             const weatherResponse = await axios.get(
-              `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`
+              `https://api.weather.yandex.ru/v2/forecast?lat=${lat}&lon=${lon}`,
+              {
+                headers: {
+                  "X-Yandex-Weather-Key": WEATHER_API_KEY,
+                },
+              }
             );
 
-            if (!weatherResponse.data.main) {
+            if (!weatherResponse.data.fact) {
               throw new Error("Нет данных о погоде.");
             }
 
@@ -147,12 +152,13 @@ function App() {
                 <div className="weather-info">
                   <div>
                     Погода сегодня: <br></br> 🌡️{" "}
-                    {(weatherData.main.temp - 273.15).toFixed(1)}°C ༄.°{" "}
-                    {weatherData.wind.speed} м/с ☁️ {weatherData.clouds.all}%
+                    {weatherData.fact.temp.toFixed(1)}°C ༄.°{" "}
+                    {weatherData.fact.wind_speed} м/с ☁️{" "}
+                    {Math.round(weatherData.fact.cloudness * 100)}%
                   </div>
                   <img
                     className="weather-icon"
-                    src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
+                    src={`https://yastatic.net/weather/i/icons/funky/dark/${weatherData.fact.icon}.svg`}
                     alt="Иконка погоды"
                   />
                 </div>
