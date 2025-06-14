@@ -1,16 +1,14 @@
-# Использование последней версии Node.js
-FROM node:22-alpine3.22
-# Задаётся рабочая директория в контейнере
+# --- Этап сборки ---
+FROM node:22-alpine3.22 AS builder
 WORKDIR /app
-# Копируются package.json и package-lock.json
 COPY package*.json ./
-# Установка зависимостей
 RUN npm ci
-# Копирование всех файлов из локального каталога в контейнер
 COPY . .
-# Сборка проекта
 RUN npm run build
-# Открывает порт 3000 в контейнере (порт React по умолчанию).
-EXPOSE 4173
-# Сообщает Docker о необходимости запуска npm start при запуске контейнера
-CMD ["npm", "run", "preview"]
+
+# --- Этап развертывания ---
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
