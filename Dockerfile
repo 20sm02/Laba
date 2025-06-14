@@ -1,5 +1,5 @@
 # Использование последней версии Node.js
-FROM node:22-lts
+FROM node:22-alpine3.22
 # Задаётся рабочая директория в контейнере
 WORKDIR /app
 # Копируются package.json и package-lock.json
