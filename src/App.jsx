@@ -57,29 +57,24 @@ function App() {
           USDrate,
           EURrate,
         });
-        navigator.geolocation.getCurrentPosition(
-          async (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const weatherResponse = await axios.get(
-              `https://api.weather.yandex.ru/v2/forecast?lat=${lat}&lon=${lon}`,
-              {
-                headers: {
-                  "X-Yandex-Weather-Key": WEATHER_API_KEY,
-                },
-              }
-            );
+        
+        const lat = "45.035470";
+        const lon = "38.975313";
 
-            if (!weatherResponse.data.fact) {
-              throw new Error("Нет данных о погоде.");
-            }
-
-            setWeatherData(weatherResponse.data);
-          },
-          (error) => {
-            console.error(error);
+        const weatherResponse = await axios.get(
+          `https://api.weather.yandex.ru/v2/forecast?lat=${lat}&lon=${lon}`,
+          {
+            headers: {
+              "X-Yandex-Weather-Key": WEATHER_API_KEY,
+            },
           }
         );
+
+        if (!weatherResponse.data.fact) {
+          throw new Error("Нет данных о погоде.");
+        }
+
+        setWeatherData(weatherResponse.data);
       } catch (err) {
         console.error(err);
         setError("Ошибка загрузки данных.");
